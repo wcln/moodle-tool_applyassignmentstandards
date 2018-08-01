@@ -37,7 +37,25 @@ require_once($CFG->libdir.'/adminlib.php');
 function tool_applyassignmentstandards_set_assignment_standards($params) {
     global $DB;
 
-    $sql = 'UPDATE mdl_assign 
+    // feedback comments and files
+    $feedback_comments_sql = "UPDATE {assign_plugin_config}
+                     SET value = ?
+                     WHERE plugin = 'comments'
+                     AND subtype = 'assignfeedback'
+                     AND name = 'enabled'";
+    $DB->execute($feedback_comments_sql, array($params['feedbackcomments']));
+
+    $feedback_files_sql = "UPDATE {assign_plugin_config}
+                     SET value = ?
+                     WHERE plugin = 'file'
+                     AND subtype = 'assignfeedback'
+                     AND name = 'enabled'";
+    $DB->execute($feedback_files_sql, array($params['feedbackfiles']));
+
+    unset($params['feedbackcomments']);
+    unset($params['feedbackfiles']);
+
+    $sql = 'UPDATE {assign}
              SET allowsubmissionsfromdate=?,
                  duedate=?,
                  cutoffdate=?,
@@ -52,9 +70,17 @@ function tool_applyassignmentstandards_set_assignment_standards($params) {
                  teamsubmissiongroupingid=?,
                  sendnotifications=?,
                  sendlatenotifications=?,
-                 sendstudentnotifications=?';
+                 sendstudentnotifications=?
+                 completionpass=?,
+                 completion=?,
+                 completiongradeitemnumber=?,
+                 completionview=?,
+                 completionexpected=?
+                 WHERE {course_modules}.instance={assign}.id
+                 AND {assign}.course={course_modules}.course';
 
     $DB->execute($sql, $params);
+
 }
 
 /**

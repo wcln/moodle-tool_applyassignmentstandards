@@ -30,7 +30,7 @@ require_once('standards_form.php');
 require_once(__DIR__.'/locallib.php');
 
 // Calls require_login and performs permission checks for admin pages
-admin_externalpage_setup('applyassignmentstandards'); 
+admin_externalpage_setup('applyassignmentstandards');
 
 // Set up the page.
 $title = get_string('pluginname', 'tool_applyassignmentstandards');
@@ -41,8 +41,8 @@ $PAGE->set_title($title);
 $PAGE->set_heading($title);
 
 $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/admin/tool/applyassignmentstandards/ajax/onselect.js'));
- 
- 
+
+
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('heading', 'tool_applyassignmentstandards'));
 
@@ -60,7 +60,12 @@ if ($fromform = $mform->get_data()) {
 	$params = (array)$fromform;
 	array_pop($params);
 
-	tool_applyassignmentstandards_set_assignment_standards($params);
+  unset($params['feedbackcomments']);
+  unset($params['feedbackfiles']);
+
+  var_dump($params);
+
+	//tool_applyassignmentstandards_set_assignment_standards($params);
 
 	echo "<p><img src=\"images/checkmark.png\">Assignment standards successfully applied to all assignments!</p>";
 	$mform->display();
@@ -73,7 +78,7 @@ if ($fromform = $mform->get_data()) {
 	$mform->display();
 }
 
- 
+
 echo $OUTPUT->footer();
 
 ?>

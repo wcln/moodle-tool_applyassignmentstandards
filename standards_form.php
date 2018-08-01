@@ -31,8 +31,8 @@ require_once(__DIR__.'/locallib.php');
 /**
  * Definition of standards form.
  *
- * @copyright  
- * @license    
+ * @copyright
+ * @license
  */
 class standards_form extends moodleform {
 
@@ -62,6 +62,14 @@ class standards_form extends moodleform {
         $mform->addElement('text', 'alwaysshowdescription', 'alwaysshowdescription');
         $mform->setType('alwaysshowdescription', PARAM_RAW);
         $mform->setDefault('alwaysshowdescription', 0);
+
+        $mform->addElement('text', 'feedbackcomments', 'feedbackcomments');
+        $mform->setType('feedbackcomments', PARAM_RAW);
+        $mform->setDefault('feedbackcomments', 1);
+
+        $mform->addElement('text', 'feedbackfiles', 'feedbackfiles');
+        $mform->setType('feedbackfiles', PARAM_RAW);
+        $mform->setDefault('feedbackfiles', 1);
 
         $mform->addElement('text', 'submissiondrafts', 'submissiondrafts');
         $mform->setType('submissiondrafts', PARAM_RAW);
@@ -106,6 +114,26 @@ class standards_form extends moodleform {
         $mform->addElement('text', 'sendstudentnotifications', 'sendstudentnotifications');
         $mform->setType('sendstudentnotifications', PARAM_RAW);
         $mform->setDefault('sendstudentnotifications', 1);
+
+        $mform->addElement('text', 'completionpass', 'completionpass');
+        $mform->setType('completionpass', PARAM_RAW);
+        $mform->setDefault('completionpass', 0);
+
+        $mform->addElement('text', 'completion', 'completion');
+        $mform->setType('completion', PARAM_RAW);
+        $mform->setDefault('completion', 2);
+
+        $mform->addElement('text', 'completiongradeitemnumber', 'completiongradeitemnumber');
+        $mform->setType('completiongradeitemnumber', PARAM_RAW);
+        $mform->setDefault('completiongradeitemnumber', 0);
+
+        $mform->addElement('text', 'completionview', 'completionview');
+        $mform->setType('completionview', PARAM_RAW);
+        $mform->setDefault('completionview', 0);
+
+        $mform->addElement('text', 'completionexpected', 'completionexpected');
+        $mform->setType('completionexpected', PARAM_RAW);
+        $mform->setDefault('completionexpected', 0);
 
         $this->add_action_buttons(false, get_string('submit', 'tool_applyassignmentstandards'));
     }
