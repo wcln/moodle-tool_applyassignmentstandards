@@ -60,12 +60,7 @@ if ($fromform = $mform->get_data()) {
 	$params = (array)$fromform;
 	array_pop($params);
 
-  unset($params['feedbackcomments']);
-  unset($params['feedbackfiles']);
-
-  var_dump($params);
-
-	//tool_applyassignmentstandards_set_assignment_standards($params);
+	tool_applyassignmentstandards_set_assignment_standards($params);
 
 	echo "<p><img src=\"images/checkmark.png\">Assignment standards successfully applied to all assignments!</p>";
 	$mform->display();
